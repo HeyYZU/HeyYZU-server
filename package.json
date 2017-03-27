@@ -1,0 +1,15 @@
+{
+  "name": "HeyYZU-server",
+  "version": "0.0.1",
+  "description": "HeyYZU app server side",
+  "main": "index.js",
+  "repository": "git@github.com:HeyYZU/HeyYZU-server.git",
+  "author": "Erickson Juang <a820224@gmail.com>",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1"
+  }
+}
