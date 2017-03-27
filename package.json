@@ -6,10 +6,16 @@
   "repository": "git@github.com:HeyYZU/HeyYZU-server.git",
   "author": "Erickson Juang <a820224@gmail.com>",
   "license": "GPL-3.0",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1"
+    "eslint-plugin-standard": "^2.1.1",
+    "mocha": "^3.2.0"
   }
 }
