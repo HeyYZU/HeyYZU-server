@@ -5,5 +5,15 @@
       "username": "",
       "password": ""
     }
-  }
+  },
+  "testingUser": [
+    {
+      "username": "",
+      "password": "",
+      "year": 0,
+      "semester": 0,
+      "courseId": "",
+      "courseClass": ""
+    }
+  ]
 }
