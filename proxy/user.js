@@ -100,6 +100,23 @@ const materials = (token, year, semester) => {
   })
 }
 
+materials.attachment = (token, id) => {
+  if (!token || !id) {
+    return Promise.reject(new Error('token and id must be given.'))
+  }
+
+  return response({
+    method: 'POST',
+    uri: 'https://unipop.yzu.edu.tw/YzuPortalAPI/api/Portal/UserFileDownLoad',
+    form: {
+      'token': token,
+      'fileType': 'material',
+      'fileID': id
+    },
+    resolveWithFullResponse: true
+  })
+}
+
 const announcements = (token, year, semester) => {
   if (!token || !year || !semester) {
     return Promise.reject(new Error('token, year and semester must be given.'))
@@ -117,6 +134,8 @@ const announcements = (token, year, semester) => {
     json: true
   })
 }
+
+announcements.attachment = materials.attachment
 
 const libraryReserving = (token) => {
   if (!token) {
