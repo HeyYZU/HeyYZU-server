@@ -5,10 +5,10 @@ const request = require('request-promise')
 const response = (options) => {
   return request(options).then((res) => {
     if (res.statusCode !== 200) {
-      throw new Error({
+      return Promise.reject(new Error({
         body: res.body,
         status: res.status.code
-      })
+      }))
     }
     return res.body
   })
@@ -16,7 +16,7 @@ const response = (options) => {
 
 const homeworks = (token, year, semester) => {
   if (!token || !year || !semester) {
-    throw new Error('toke, year and semester must be given.')
+    return Promise.reject(new Error('token, year and semester must be given.'))
   }
   return response({
     method: 'POST',
@@ -33,7 +33,7 @@ const homeworks = (token, year, semester) => {
 
 homeworks.archive = (token, id) => {
   if (!token || !id) {
-    throw new Error('toke and id must be given.')
+    return Promise.reject(new Error('token and id must be given.'))
   }
 
   return response({
@@ -50,7 +50,7 @@ homeworks.archive = (token, id) => {
 
 homeworks.attachment = (token, id) => {
   if (!token || !id) {
-    throw new Error('toke and id must be given.')
+    return Promise.reject(new Error('token and id must be given.'))
   }
 
   return response({
@@ -67,7 +67,7 @@ homeworks.attachment = (token, id) => {
 
 const materials = (token, year, semester) => {
   if (!token || !year || !semester) {
-    throw new Error('token, year and semester must be given.')
+    return Promise.reject(new Error('token, year and semester must be given.'))
   }
 
   return response({
@@ -85,7 +85,7 @@ const materials = (token, year, semester) => {
 
 const announcements = (token, year, semester) => {
   if (!token || !year || !semester) {
-    throw new Error('token, year and semester must be given.')
+    return Promise.reject(new Error('token, year and semester must be given.'))
   }
 
   return response({
@@ -103,7 +103,7 @@ const announcements = (token, year, semester) => {
 
 const libraryReserving = (token) => {
   if (!token) {
-    throw new Error('token must be given.')
+    return Promise.reject(new Error('token must be given.'))
   }
 
   return response({
@@ -119,7 +119,7 @@ const libraryReserving = (token) => {
 
 const libraryReading = (token) => {
   if (!token) {
-    throw new Error('token must be given.')
+    return Promise.reject(new Error('token must be given.'))
   }
 
   return response({
@@ -135,7 +135,7 @@ const libraryReading = (token) => {
 
 const libraryRead = (token) => {
   if (!token) {
-    throw new Error('token must be given.')
+    return Promise.reject(new Error('token must be given.'))
   }
 
   return response({
