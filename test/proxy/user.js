@@ -144,6 +144,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get library reading list', function() {
+        this.timeout(10 * 1000)
         it('is successful', (done) => {
           user.library.reading(testToken)
             .then((result) => {
@@ -168,6 +169,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get library read list', function() {
+        this.timeout(10 * 1000)
         it('is successful', (done) => {
           user.library.read(testToken)
             .then((result) => {
@@ -192,6 +194,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get library reserving list', function() {
+        this.timeout(10 * 1000)
         it('is successful', (done) => {
           user.library.reserving(testToken)
             .then((result) => {
