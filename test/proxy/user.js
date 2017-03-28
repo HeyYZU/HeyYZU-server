@@ -13,176 +13,182 @@ module.exports = (username, password, year, semester) => {
     this.timeout(10 * 1000)
     // get testing token
     let testToken = ''
-    auth(username, password)
+    const getToken = auth(username, password)
       .then((r) => {
         testToken = r.token
       })
-    describe('get homeworks', function() {
-      it('is successful', (done) => {
-        user.course.homeworks(testToken, year, semester)
+
+    expect(getToken).to.eventually.be.fulfilled.then(() => {
+      describe('get homeworks', function() {
+        it('is successful', (done) => {
+          user.course.homeworks(testToken, year, semester)
             .then((result) => {
               expect(result).to.be.an('array')
               done()
             }, (err) => {
               done(err)
             })
-      })
+        })
 
-      it('throw error when token is invalid', (done) => {
-        user.course.homeworks('invalid', year, semester)
-          .then((result) => {
-            done(new Error('No throw error when token is invalid.'))
-          })
-          .catch((err) => {
-            expect(err).to.be.an('error')
-            done()
-          })
-          .catch(done)
-      })
-
-      describe('get archive', function() {
-        it('throw error when token or id is invalid', (done) => {
-          user.course.homeworks.archive('invalid', 0)
+        it('throw error when token is invalid', (done) => {
+          user.course.homeworks('invalid', year, semester)
             .then((result) => {
-              done(new Error('No throw error when token or id is invalid.'))
+              done(new Error('No throw error when token is invalid.'))
             })
             .catch((err) => {
-              expect(err).to.be.an('error')
+              expect(err).to.be.an.instanceof(Error)
+              done()
+            })
+            .catch(done)
+        })
+
+        describe('archive', function() {
+          it('throw error when token or id is invalid', (done) => {
+            user.course.homeworks.archive('invalid', 0)
+              .then((result) => {
+                done(new Error('No throw error when token or id is invalid.'))
+              })
+              .catch((err) => {
+                expect(err).to.be.an.instanceof(Error)
+                done()
+              })
+              .catch(done)
+          })
+        })
+
+        describe('attachment', function() {
+          it('throw error when token or id is invalid', (done) => {
+            user.course.homeworks.attachment('invalid', 0)
+              .then((result) => {
+                done(new Error('No throw error when token or id is invalid.'))
+              })
+              .catch((err) => {
+                expect(err).to.be.an.instanceof(Error)
+                done()
+              })
+              .catch(done)
+          })
+        })
+      })
+
+      describe('get materials', function() {
+        it('is successful', (done) => {
+          user.course.materials(testToken, year, semester)
+            .then((result) => {
+              expect(result).to.be.an('array')
+              done()
+            }, (err) => {
+              done(err)
+            })
+        })
+
+        it('throw error when token is invalid', (done) => {
+          user.course.materials('invalid', year, semester)
+            .then((result) => {
+              done(new Error('No throw error when token is invalid.'))
+            })
+            .catch((err) => {
+              expect(err).to.be.an.instanceof(Error)
               done()
             })
             .catch(done)
         })
       })
 
-      describe('get attachment', function() {
-        it('throw error when token or id is invalid', (done) => {
-          user.course.homeworks.attachment('invalid', 0)
+      describe('get announcements', function() {
+        it('is successful', (done) => {
+          user.course.announcements(testToken, year, semester)
             .then((result) => {
-              done(new Error('No throw error when token or id is invalid.'))
+              expect(result).to.be.an('array')
+              done()
+            }, (err) => {
+              done(err)
+            })
+        })
+
+        it('throw error when token is invalid', (done) => {
+          user.course.announcements('12558', year, semester)
+            .then((result) => {
+              done(new Error('No throw error when token is invalid.'))
             })
             .catch((err) => {
-              expect(err).to.be.an('error')
+              expect(err).to.be.an.instanceof(Error)
               done()
             })
             .catch(done)
         })
       })
-    })
 
-    describe('get materials', function() {
-      it('is successful', (done) => {
-        user.course.materials(testToken, year, semester)
+      describe('get library reading list', function() {
+        it('is successful', (done) => {
+          user.library.reading(testToken)
             .then((result) => {
               expect(result).to.be.an('array')
               done()
             }, (err) => {
               done(err)
             })
+        })
+
+        it('throw error when token is invalid', (done) => {
+          user.library.reading('sdfasdf')
+            .then((result) => {
+              done(new Error('No throw error when token is invalid.'))
+            })
+            .catch((err) => {
+              expect(err).to.be.an.instanceof(Error)
+              done()
+            })
+            .catch(done)
+        })
       })
 
-      it('throw error when token is invalid', (done) => {
-        user.course.materials('invalid', year, semester)
-          .then((result) => {
-            done(new Error('No throw error when token is invalid.'))
-          })
-          .catch((err) => {
-            expect(err).to.be.an('error')
-            done()
-          })
-          .catch(done)
-      })
-    })
-
-    describe('get announcements', function() {
-      it('is successful', (done) => {
-        user.course.announcements(testToken, year, semester)
+      describe('get library read list', function() {
+        it('is successful', (done) => {
+          user.library.read(testToken)
             .then((result) => {
               expect(result).to.be.an('array')
               done()
             }, (err) => {
               done(err)
             })
+        })
+
+        it('throw error when token is invalid', (done) => {
+          user.library.read('sdfasdf')
+            .then((result) => {
+              done(new Error('No throw error when token is invalid.'))
+            })
+            .catch((err) => {
+              expect(err).to.be.an.instanceof(Error)
+              done()
+            })
+            .catch(done)
+        })
       })
 
-      it('throw error when token is invalid', (done) => {
-        user.course.announcements('12558', year, semester)
-          .then((result) => {
-            done(new Error('No throw error when token is invalid.'))
-          })
-          .catch((err) => {
-            expect(err).to.be.an('error')
-            done()
-          })
-          .catch(done)
-      })
-    })
+      describe('get library reserving list', function() {
+        it('is successful', (done) => {
+          user.library.reserving(testToken)
+            .then((result) => {
+              expect(result).to.be.an('array')
+              done()
+            }, (err) => {
+              done(err)
+            })
+        })
 
-    describe('get library reading list', function() {
-      it('is successful', (done) => {
-        user.library.reading(testToken)
-          .then((result) => {
-            expect(result).to.be.an('array')
-          }, (err) => {
-            done(err)
-          })
-      })
-
-      it('throw error when token is invalid', (done) => {
-        user.library.reading('sdfasdf')
-          .then((result) => {
-            done(new Error('No throw error when token is invalid.'))
-          })
-          .catch((err) => {
-            expect(err).to.be.an('error')
-            done()
-          })
-          .catch(done)
-      })
-    })
-
-    describe('get library read list', function() {
-      it('is successful', (done) => {
-        user.library.read(testToken)
-          .then((result) => {
-            expect(result).to.be.an('array')
-          }, (err) => {
-            done(err)
-          })
-      })
-
-      it('throw error when token is invalid', (done) => {
-        user.library.read('sdfasdf')
-          .then((result) => {
-            done(new Error('No throw error when token is invalid.'))
-          })
-          .catch((err) => {
-            expect(err).to.be.an('error')
-            done()
-          })
-          .catch(done)
-      })
-    })
-
-    describe('get library reserving list', function() {
-      it('is successful', (done) => {
-        user.library.reserving(testToken)
-          .then((result) => {
-            expect(result).to.be.an('array')
-          }, (err) => {
-            done(err)
-          })
-      })
-
-      it('throw error when token is invalid', (done) => {
-        user.library.reserving('sdfasdf')
-          .then((result) => {
-            done(new Error('No throw error when token is invalid.'))
-          })
-          .catch((err) => {
-            expect(err).to.be.an('error')
-            done()
-          })
-          .catch(done)
+        it('throw error when token is invalid', (done) => {
+          user.library.reserving('sdfasdf')
+            .then((result) => {
+              done(new Error('No throw error when token is invalid.'))
+            })
+            .catch((err) => {
+              expect(err).to.be.an.instanceof(Error)
+              done()
+            })
+            .catch(done)
+        })
       })
     })
   })
