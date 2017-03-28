@@ -24,7 +24,7 @@ const getRSAKey = () => {
 
 const auth = (username, password) => {
   if (!username || !password) {
-    throw new Error('Must give username and password')
+    return Promise.reject(new Error('Must give username and password'))
   }
 
   let prepareKey = (keyInfo) => {
@@ -60,7 +60,7 @@ const auth = (username, password) => {
 
   let processRes = (res) => {
     if (res.body.Token.length === 0 || res.body.DeadLine.length === 0) {
-      throw new Error('Uesername or password is mistake.')
+      return Promise.reject(new Error('Uesername or password is mistake.'))
     }
     return res.body
   }
