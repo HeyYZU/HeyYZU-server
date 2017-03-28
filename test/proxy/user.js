@@ -19,6 +19,30 @@ module.exports = (username, password, year, semester) => {
       })
 
     expect(getToken).to.eventually.be.fulfilled.then(() => {
+      describe('curriculum', function() {
+        it('is successful', (done) => {
+          user.course.curriculum(testToken, year, semester)
+            .then((result) => {
+              expect(result).to.be.an('array')
+              done()
+            }, (err) => {
+              done(err)
+            })
+        })
+
+        it('throw error when token is invalid', (done) => {
+          user.course.curriculum('invalid')
+            .then((r) => {
+              done(new Error('No throw error when token is valid.'))
+            })
+            .catch((err) => {
+              expect(err).to.be.an.instanceof(Error)
+              done()
+            })
+            .catch(done)
+        })
+      })
+
       describe('get homeworks', function() {
         it('is successful', (done) => {
           user.course.homeworks(testToken, year, semester)
