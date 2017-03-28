@@ -14,6 +14,23 @@ const response = (options) => {
   })
 }
 
+const curriculum = (token, year, semester) => {
+  if (!token || !year || !semester) {
+    return Promise.reject(new Error('token, year and semester must be given.'))
+  }
+  return response({
+    method: 'POST',
+    uri: 'https://unipop.yzu.edu.tw/YzuPortalAPI/api/Portal/UserCourseList',
+    form: {
+      'token': token,
+      'year': year,
+      'smtr': semester
+    },
+    resolveWithFullResponse: true,
+    json: true
+  })
+}
+
 const homeworks = (token, year, semester) => {
   if (!token || !year || !semester) {
     return Promise.reject(new Error('token, year and semester must be given.'))
@@ -151,6 +168,7 @@ const libraryRead = (token) => {
 
 module.exports = {
   course: {
+    curriculum: curriculum,
     homeworks: homeworks,
     materials: materials,
     announcements: announcements
