@@ -8,17 +8,16 @@ chai.use(chaiAsPromised)
 chai.should()
 
 module.exports = (username, password, year, semester) => {
-  // User Testing
-  describe('user proxy testing', function() {
-    this.timeout(10 * 1000)
-    // get testing token
-    let testToken = ''
-    const getToken = auth(username, password)
-      .then((r) => {
-        testToken = r.token
-      })
+  // get testing token
+  let testToken = ''
+  const getToken = auth(username, password)
+    .then((r) => {
+      testToken = r.token
+    })
 
-    expect(getToken).to.eventually.be.fulfilled.then(() => {
+  expect(getToken).to.eventually.be.fulfilled.then(() => {
+    describe('User Proxy Test', function() {
+      this.timeout(10 * 1000)
       describe('curriculum', function() {
         it('is successful', (done) => {
           user.course.curriculum(testToken, year, semester)
