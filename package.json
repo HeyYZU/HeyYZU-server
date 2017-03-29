@@ -7,11 +7,13 @@
   "author": "Erickson Juang <a820224@gmail.com>",
   "license": "GPL-3.0",
   "scripts": {
+    "start": "cross-env --httpPort=8080 node index.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "cross-env": "^3.2.4",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
     "eslint-plugin-promise": "^3.5.0",
@@ -19,6 +21,9 @@
     "mocha": "^3.2.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "log4js": "^1.1.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.0",
     "ursa": "^0.9.4"
