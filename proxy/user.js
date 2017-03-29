@@ -7,7 +7,7 @@ const response = (options) => {
     if (res.statusCode !== 200) {
       return Promise.reject(new Error({
         body: res.body,
-        status: res.status.code
+        status: res.statusCode
       }))
     }
     return res.body

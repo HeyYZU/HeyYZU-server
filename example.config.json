@@ -1,7 +1,7 @@
 {
   "YZU_API": {
     "appID": "",
-    "sceret": {
+    "secret": {
       "username": "",
       "password": ""
     }

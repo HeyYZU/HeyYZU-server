@@ -1,4 +1,4 @@
-const path = require('path')
+global.path = require('path')
 global.BASE_DIR = path.join(__dirname, '../')
 try {
   global.CONFIG = require('../config.json')
@@ -6,9 +6,9 @@ try {
   global.CONFIG = {
     YZU_API: {
       appID: process.env.YZU_API_appID,
-      sceret: {
-        username: process.env.YZU_API_sceret_username,
-        password: process.env.YZU_API_sceret_password
+      secret: {
+        username: process.env.YZU_API_secret_username,
+        password: process.env.YZU_API_secret_password
       }
     },
     testing: [{

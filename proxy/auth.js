@@ -9,7 +9,7 @@ const getRSAKey = () => {
     method: 'POST',
     uri: 'https://unipop.yzu.edu.tw/YzuPortalAPI/api/Auth/RSAkeybyAppID',
     headers: {
-      'Authorization': 'Basic ' + new Buffer(config.sceret.username + ':' + config.sceret.password).toString('base64')
+      'Authorization': 'Basic ' + new Buffer(config.secret.username + ':' + config.secret.password).toString('base64')
     },
     form: {
       'AppID': config.appID
@@ -45,7 +45,7 @@ const auth = (username, password) => {
       method: 'POST',
       uri: 'https://unipop.yzu.edu.tw/YzuPortalAPI/api/Auth/UserAccessToken',
       headers: {
-        'Authorization': 'Basic ' + new Buffer(config.sceret.username + ':' + config.sceret.password).toString('base64')
+        'Authorization': 'Basic ' + new Buffer(config.secret.username + ':' + config.secret.password).toString('base64')
       },
       form: {
         'AppID': config.appID,
@@ -60,7 +60,7 @@ const auth = (username, password) => {
 
   let processRes = (res) => {
     if (res.body.Token.length === 0 || res.body.DeadLine.length === 0) {
-      return Promise.reject(new Error('Uesername or password is mistake.'))
+      return Promise.reject(new Error('Username or password is mistake.'))
     }
     return res.body
   }
