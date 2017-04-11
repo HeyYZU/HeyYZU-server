@@ -1,3 +1,5 @@
+'use strict'
+
 const router = require('express').Router()
 const c = require(path.join(BASE_DIR, 'controller/calendar'))
 

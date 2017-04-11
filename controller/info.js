@@ -1,3 +1,5 @@
+'use strict'
+
 const mock = require('./mock.json').info
 const systemInfo = (req, res, next) => {
   res.status(200).json(mock.sysInfo)

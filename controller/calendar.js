@@ -1,3 +1,5 @@
+'use strict'
+
 const mock = require('./mock.json').calendar
 const calendarList = (req, res, next) => {
   res.status(mock.list.status).json({ message: mock.list.message })

@@ -1,3 +1,5 @@
+'use strict'
+
 const mock = require('./mock.json').library
 const readingList = (req, res, next) => {
   res.status(200).json(mock.reading)

@@ -1,3 +1,5 @@
+'use strict'
+
 const router = require('express').Router()
 const path = require('path')
 const c = require(path.join(BASE_DIR, 'controller/info'))

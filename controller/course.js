@@ -1,3 +1,5 @@
+'use strict'
+
 const mock = require('./mock.json').course
 const announcement = (req, res, next) => {
   res.status(200).json(mock.announcement)
