@@ -24,8 +24,11 @@ try {
 const TEST_DATA = CONFIG.testing
 
 const proxyTesting = require('./proxy')
+const apiTesting = require('./api')
 
 TEST_DATA.forEach((tester) => {
   // Proxy Testing
   proxyTesting(tester.username, tester.password, tester.year, tester.semester, tester.courseId, tester.courseClass)
+  // API testing
+  apiTesting(tester.username, tester.password)
 })
