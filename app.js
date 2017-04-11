@@ -19,14 +19,14 @@ app.use(router)
 app.use((err, req, res, next) => {
   logger.error(err)
   res.status(500).json({
-    messages: 'Internal error.'
+    message: 'Internal error.'
   })
 })
 
 /* Handle 404 */
 app.use((req, res, next) => {
   res.status(404).json({
-    messages: 'Not Found.'
+    message: 'Not Found.'
   })
 })
 
