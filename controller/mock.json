@@ -17,7 +17,8 @@
       },
       "putEvent": {
         "status": 200,
-        "message": "ok"
+        "message": "ok",
+        "id": 1
       },
       "delEvent": {
         "status": 400,
