@@ -105,7 +105,6 @@ module.exports = (auth) => {
               expect(favoriteBook).to.include.keys('author')
               expect(favoriteBook).to.include.keys('attr')
               expect(favoriteBook.attr).to.include.keys('index')
-              expect(favoriteBook.attr).to.include.keys('renewable')
               expect(favoriteBook.attr).to.include.keys('reserved')
               done()
             }
@@ -150,8 +149,7 @@ module.exports = (auth) => {
               expect(favoriteBook).to.include.keys('author')
               expect(favoriteBook).to.include.keys('attr')
               expect(favoriteBook.attr).to.include.keys('order')
-              expect(favoriteBook.attr).to.include.keys('renewable')
-              expect(favoriteBook.attr).to.include.keys('reserved')
+              expect(favoriteBook.attr).to.include.keys('reservedBefore')
               done()
             }
           })
