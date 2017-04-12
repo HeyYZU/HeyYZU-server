@@ -1,8 +1,30 @@
 global.BASE_DIR = __dirname
-global.CONFIG = require('./config.json')
 global.log4js = require('log4js')
 global.path = require('path')
 global.omitEmpty = require('omit-empty')
+
+/* Loading Config */
+try {
+  global.CONFIG = require('./config.json')
+} catch (e) {
+  global.CONFIG = {
+    YZU_API: {
+      appID: process.env.YZU_API_appID,
+      secret: {
+        username: process.env.YZU_API_secret_username,
+        password: process.env.YZU_API_secret_password
+      }
+    },
+    testing: [{
+      username: process.env.testing_username,
+      password: process.env.testing_password,
+      year: process.env.testing_year,
+      semester: process.env.testing_semester,
+      courseId: process.env.testing_courseId,
+      courseClass: process.env.testing_courseClass
+    }]
+  }
+}
 
 const http = require('http')
 const app = require('./app')
