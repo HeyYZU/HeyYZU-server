@@ -164,8 +164,7 @@
         "author": "Mock Author",
         "attr": {
           "index": "312.52 8474 2015",
-          "renewable": false,
-          "reserved": false
+          "reserved": 5
         }
       }
     ],
@@ -226,8 +225,7 @@
             "author": "Mock Author",
             "attr": {
               "index": "312.52 8474 2015",
-              "renewable": false,
-              "reserved": false
+              "reserved": 5
             }
           }
         ]
