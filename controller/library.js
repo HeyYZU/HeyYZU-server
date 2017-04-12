@@ -42,7 +42,7 @@ const readList = (req, res, next) => {
     })
     .then((content) => {
       return Promise.all(
-          content.map(el => libraryProxy.status(el.id))
+          content.map(el => libraryProxy.book.status(el.id))
         )
         .then((res) => {
           return content.map(el => {
@@ -109,12 +109,12 @@ const dashboard = (req, res, next) => {
 
 const bookInfo = (req, res, next) => {
   let bookId = req.params.id
-  libraryProxy.status(bookId)
+  libraryProxy.book.status(bookId)
       // Following key name of el is from yzu api response
     .then((res) => omitEmpty({
       title: res.info.bktitle,
       author: res.info.author,
-      index: res.info.callno,
+      index: res.info.callno || '採購或編目中',
       publisher: res.info.Publisher,
       year: res.info.publish_YY,
       isbn: parseInt(res.info.ISBN.replace(/[^0-9]/ig, ''), 10) || null,
