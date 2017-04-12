@@ -38,3 +38,6 @@ jspm_packages
 
 # App configuration file
 config.json
+
+# Ignore vscode env setting
+.vscode

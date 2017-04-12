@@ -7,7 +7,7 @@ chai.use(chaiAsPromised)
 chai.should()
 
 module.exports = (username, password) => {
-  describe('auth', function() {
+  describe('Auth Proxy Test', function() {
     this.timeout(10 * 1000)
     it('is successful when username & password are correct', (done) => {
       auth(username, password)

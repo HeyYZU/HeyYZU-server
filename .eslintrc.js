@@ -26,6 +26,9 @@ module.exports = {
   },
   "globals": {
     "CONFIG": true,
-    "BASE_DIR": true
+    "BASE_DIR": true,
+    "log4js": true,
+    "path": true,
+    "omitEmpty": true
   }
 }

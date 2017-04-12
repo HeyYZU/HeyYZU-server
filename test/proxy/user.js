@@ -8,17 +8,40 @@ chai.use(chaiAsPromised)
 chai.should()
 
 module.exports = (username, password, year, semester) => {
-  // User Testing
-  describe('user proxy testing', function() {
-    this.timeout(10 * 1000)
-    // get testing token
-    let testToken = ''
-    const getToken = auth(username, password)
-      .then((r) => {
-        testToken = r.token
+  // get testing token
+  let testToken = ''
+  const getToken = auth(username, password)
+    .then((r) => {
+      testToken = r.token
+    })
+
+  expect(getToken).to.eventually.be.fulfilled.then(() => {
+    describe('User Proxy Test', function() {
+      this.timeout(10 * 1000)
+      describe('curriculum', function() {
+        it('is successful', (done) => {
+          user.course.curriculum(testToken, year, semester)
+            .then((result) => {
+              expect(result).to.be.an('array')
+              done()
+            }, (err) => {
+              done(err)
+            })
+        })
+
+        it('throw error when token is invalid', (done) => {
+          user.course.curriculum('invalid')
+            .then((r) => {
+              done(new Error('No throw error when token is valid.'))
+            })
+            .catch((err) => {
+              expect(err).to.be.an.instanceof(Error)
+              done()
+            })
+            .catch(done)
+        })
       })
 
-    expect(getToken).to.eventually.be.fulfilled.then(() => {
       describe('get homeworks', function() {
         it('is successful', (done) => {
           user.course.homeworks(testToken, year, semester)
@@ -120,6 +143,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get library reading list', function() {
+        this.timeout(10 * 1000)
         it('is successful', (done) => {
           user.library.reading(testToken)
             .then((result) => {
@@ -144,6 +168,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get library read list', function() {
+        this.timeout(10 * 1000)
         it('is successful', (done) => {
           user.library.read(testToken)
             .then((result) => {
@@ -168,6 +193,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get library reserving list', function() {
+        this.timeout(10 * 1000)
         it('is successful', (done) => {
           user.library.reserving(testToken)
             .then((result) => {

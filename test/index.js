@@ -1,3 +1,4 @@
+global.log4js = require('log4js')
 global.path = require('path')
 global.BASE_DIR = path.join(__dirname, '../')
 try {
@@ -21,11 +22,55 @@ try {
     }]
   }
 }
+
+/* Setting log4js */
+
+log4js.configure({
+  appenders: [
+    {
+      type: 'logLevelFilter',
+      level: process.env.node_env === 'test' ? 'OFF' : 'INFO',
+      category: 'proxy',
+      appender: {
+        type: 'console',
+        filename: BASE_DIR + 'test-log/proxy-access.log',
+        pattern: '-yyyy-MM-dd.log',
+        alwaysIncludePattern: true
+      }
+    },
+    {
+      type: 'logLevelFilter',
+      level: process.env.node_env === 'test' ? 'OFF' : 'ERROR',
+      category: 'proxy',
+      appender: {
+        type: 'console',
+        filename: BASE_DIR + 'test-log/proxy-error.log',
+        pattern: '-yyyy-MM-dd.log',
+        alwaysIncludePattern: true
+      }
+    },
+    {
+      type: 'logLevelFilter',
+      level: process.env.node_env === 'test' ? 'OFF' : 'FATAL',
+      category: 'proxy',
+      appender: {
+        type: 'console',
+        filename: BASE_DIR + 'test-log/proxy-fatal.log',
+        pattern: '-yyyy-MM-dd.log',
+        alwaysIncludePattern: true
+      }
+    }
+  ]
+})
+
 const TEST_DATA = CONFIG.testing
 
 const proxyTesting = require('./proxy')
+const apiTesting = require('./api')
 
 TEST_DATA.forEach((tester) => {
   // Proxy Testing
   proxyTesting(tester.username, tester.password, tester.year, tester.semester, tester.courseId, tester.courseClass)
+  // API testing
+  apiTesting(tester.username, tester.password)
 })

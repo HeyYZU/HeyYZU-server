@@ -1,0 +1,294 @@
+{
+  "activity": {
+    "list": {
+      "status": 501,
+      "message": "Not Implemented"
+    }
+  },
+  "calendar": {
+    "list": {
+      "status": 501,
+      "message": "Not Implemented"
+    },
+    "event": {
+      "get": {
+        "status": 501,
+        "message": "Not Implemented"
+      },
+      "putEvent": {
+        "status": 200,
+        "message": "ok",
+        "id": 1
+      },
+      "delEvent": {
+        "status": 400,
+        "message": "something must given"
+      }
+    }
+  },
+  "course": {
+    "announcement": [
+      {
+        "subject": "quizzes",
+        "content": "Dear all,\n\n   Since you don't need to turn in homework exercises this semester, we will have more quizzes instead.  The following are scheduled quiz dates (10/7, 10/28, 12/2, 12/23). Be prepared.\n\n\nYour instructor",
+        "datetime": 1411970536,
+        "author": "MockApi"
+      },
+      {
+        "subject": "correction: exercise 2 in LL(1) ppt",
+        "content": "Please see the attached file.",
+        "datetime": 1415158441,
+        "attach": {
+          "id": 42503,
+          "filename": "exercise2.ppt"
+        },
+        "author": "MockApi"
+      }
+    ],
+    "archive": "archive_on_binary",
+    "attach": "attach_on_binary",
+    "material": [
+      {
+        "subject": "Chapter 1 updated",
+        "datetime": 1415158441,
+        "attach": {
+          "id": 218897,
+          "filename": "chapter1-introd-2014.ppt"
+        }
+      },
+      {
+        "subject": "Chapter 1 updated - website",
+        "datetime": 1415198441,
+        "website": "http://example.com"
+      },
+      {
+        "subject": "Chapter 1 updated - video",
+        "datetime": 1415157441,
+        "video": "http://example.com"
+      }
+    ],
+    "homework": [
+      {
+        "subject": "maximum example",
+        "content": "it is a maximum object",
+        "datetime": 1413798568,
+        "deadline": 1418025600,
+        "group": false,
+        "optional": false,
+        "attach": {
+          "id": 1459984,
+          "filename": "prog2014.pdf"
+        },
+        "grades": 98,
+        "comment": "Mock comment",
+        "archive": [
+          {
+            "id": 1489089,
+            "filename": "demo-hw-rc.zip",
+            "datetime": 1418027600
+          }
+        ]
+      },
+      {
+        "subject": "minimum example",
+        "content": "it is a minimum object",
+        "datetime": 1413798568,
+        "deadline": 1418025600,
+        "group": false,
+        "optional": false
+      }
+    ],
+    "absent": {
+      "status": 501,
+      "message": "Not Implemented"
+    }
+  },
+  "info": {
+    "sysInfo": {
+      "api-version": "v4",
+      "system-time": 1490717821
+    },
+    "android": {
+      "status": 501,
+      "message": "Not Implemented"
+    },
+    "ios": {
+      "status": 501,
+      "message": "Not Implemented"
+    }
+  },
+  "library": {
+    "book": {
+      "title": "Mock Book title",
+      "author": "Mock Author",
+      "publisher": "Mock Book Company",
+      "year": 2013,
+      "index": "805.1895 8735 2016",
+      "isbn": 9789863184546,
+      "cover": "http://example.com",
+      "collections": [
+        {
+          "branch": "總館",
+          "collection": "英文圖書區",
+          "reservingCount": 4
+        }
+      ]
+    },
+    "reading": [
+      {
+        "id": 618867,
+        "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+        "author": "Mock Author",
+        "attr": {
+          "dueDate": 1490240744,
+          "fine": 25,
+          "renewable": false,
+          "reserved": false
+        }
+      },
+      {
+        "id": 618867,
+        "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+        "author": "Mock Author",
+        "attr": {
+          "dueDate": 1490240744,
+          "renewable": false,
+          "reserved": false
+        }
+      }
+    ],
+    "read": [
+      {
+        "id": 618867,
+        "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+        "author": "Mock Author",
+        "attr": {
+          "index": "312.52 8474 2015",
+          "reserved": 5
+        }
+      }
+    ],
+    "reserving": [
+      {
+        "id": 618867,
+        "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+        "author": "Mock Author",
+        "attr": {
+          "order": 4
+        }
+      },
+      {
+        "id": 618867,
+        "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+        "author": "Mock Author",
+        "attr": {
+          "order": 1,
+          "reservedBefore": 1490240744
+        }
+      }
+    ],
+    "favorite": [
+      {
+        "id": 618867,
+        "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+        "author": "Mock Author",
+        "attr": {
+          "index": "312.52 8474 2015",
+          "renewable": false,
+          "reserved": false
+        }
+      }
+    ],
+    "dashboard": {
+      "reading": {
+        "count": 5,
+        "leastFive": [
+          {
+            "id": 618867,
+            "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+            "author": "Mock Author",
+            "attr": {
+              "dueDate": 1490240744,
+              "fine": 25,
+              "renewable": false,
+              "reserved": false
+            }
+          }
+        ]
+      },
+      "read": {
+        "count": 5,
+        "leastFive": [
+          {
+            "id": 618867,
+            "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+            "author": "Mock Author",
+            "attr": {
+              "index": "312.52 8474 2015",
+              "reserved": 5
+            }
+          }
+        ]
+      },
+      "favorite": {
+        "count": 5,
+        "leastFive": [
+          {
+            "id": 618867,
+            "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+            "author": "Mock Author",
+            "attr": {
+              "index": "312.52 8474 2015",
+              "renewable": false,
+              "reserved": false
+            }
+          }
+        ]
+      },
+      "reversing": [
+        {
+          "id": 618867,
+          "title": "視覺極簡設計原則 : Apple iOS 從擬物到扁平革命",
+          "author": "Mock Author",
+          "attr": {
+            "order": 1,
+            "reservedBefore": 1490240744
+          }
+        }
+      ]
+    },
+    "favoriteAction": {
+      "putFavorite": {
+        "status": 200,
+        "message": "ok"
+      },
+      "delFavorite": {
+        "status": 400,
+        "message": "something must given"
+      }
+    }
+  },
+  "user": {
+    "curriculum": [
+      {
+        "lesson_id": "1031_IM106_A",
+        "name": "管理學",
+        "timeSlots": [
+          {
+            "day": 2,
+            "slot": 4,
+            "room": 3110 
+          }
+        ]
+      }
+    ],
+    "info": {
+      "status": 501,
+      "message": "Not Implemented"
+    },
+    "dashboard": {
+      "status": 501,
+      "message": "Not Implemented"
+    }
+  }
+}
