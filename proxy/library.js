@@ -29,33 +29,35 @@ const searchByISBN = (ISBN) => {
 }
 
 const bookStatus = (id) => {
-  const createPromise = (key, requestOptions) => {
+  const createPromise = (requestOptions) => {
     return response(requestOptions)
-      .then((res) =>
-        res[0] === undefined ? Promise.reject(new Error('response is empty.')) : ({key: key, res})
-      )
-      .catch((err) => {
+      .then((res) => (
+        res[0] === undefined ? createPromise(requestOptions)
+          : res[0].Description === undefined ? (res)
+          : Promise.reject(new Error('book id invalid.'))
+      ), (err) => {
         logger.debug('[bookStatus]Retry - ' + requestOptions.uri)
-        return createPromise(key, requestOptions)
+        return createPromise(requestOptions)
       })
   }
 
-  return Promise.all([
-    createPromise('info', {
+  let content = {}
+  return createPromise({
+    uri: 'https://unipop.yzu.edu.tw/OpenAPI/api/lib/Holding/' + id,
+    resolveWithFullResponse: true,
+    json: true
+  }).then((res) => {
+    content.collections = res
+    return createPromise({
       uri: 'https://unipop.yzu.edu.tw/OpenAPI/api/lib/keyword/sys=' + id,
       resolveWithFullResponse: true,
       json: true
-    }),
-    createPromise('collections', {
-      uri: 'https://unipop.yzu.edu.tw/OpenAPI/api/lib/Holding/' + id,
-      resolveWithFullResponse: true,
-      json: true
     })
-  ]).then((res) => res.reduce((pv, el) => {
-    pv[el.key] = el.key === 'info' ? el.res[0] : el.res
-    return pv
-  }, {}))
-  .catch((e) => {
+  }).then((res) => {
+    content.info = res[0]
+    return content
+  }).catch((e) => {
+    if (e.message === 'book id invalid.') e.statusCode = 404
     return Promise.reject(e)
   })
 }

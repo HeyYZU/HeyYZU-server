@@ -135,7 +135,14 @@ const bookInfo = (req, res, next) => {
       res.status(200).json(content)
     })
     .catch((e) => {
-      res.status(502).json({message: 'Bad Gateway'})
+      switch (e.statusCode) {
+        case 404:
+          res.status(404).json({message: 'Not Found'})
+          break
+        default:
+          res.status(502).json({message: 'Bad Gateway'})
+          break
+      }
     })
 }
 
