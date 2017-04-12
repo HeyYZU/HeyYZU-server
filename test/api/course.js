@@ -208,7 +208,8 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get homework list', () => {
+    describe('Get homework list', function() {
+      this.timeout(20 * 1000)
       it('with valid token', (done) => {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/homework/' + '1042_CS382_A',

@@ -13,7 +13,8 @@ const sendRequest = (options) => {
 }
 
 module.exports = (auth) => {
-  describe('Library', () => {
+  describe('Library', function() {
+    this.timeout(20 * 1000)
     // get testing token
     let token = ''
     beforeEach(function(done) {

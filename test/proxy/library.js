@@ -8,6 +8,7 @@ chai.should()
 
 module.exports = (keyword) => {
   describe('Library Proxy Test', function() {
+    this.timeout(20 * 1000)
     it('Search by keyword', (done) => {
       library.search.title(keyword)
         .then((res) => {
