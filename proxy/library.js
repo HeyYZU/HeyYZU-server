@@ -31,7 +31,9 @@ const searchByISBN = (ISBN) => {
 const bookStatus = (id) => {
   const createPromise = (key, requestOptions) => {
     return response(requestOptions)
-      .then((res) => ({key: key, res}))
+      .then((res) =>
+        res[0] === undefined ? Promise.reject(new Error('response is empty.')) : ({key: key, res})
+      )
       .catch((err) => {
         logger.info('[bookStatus]Retry - ' + requestOptions.uri)
         return createPromise(key, requestOptions)
