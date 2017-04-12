@@ -29,33 +29,33 @@ log4js.configure({
   appenders: [
     {
       type: 'logLevelFilter',
-      level: 'INFO',
+      level: process.env.node_env === 'test' ? 'OFF' : 'INFO',
       category: 'proxy',
       appender: {
-        type: 'DateFile',
-        filename: BASE_DIR + '/test-log/proxy-access.log',
+        type: 'console',
+        filename: BASE_DIR + 'test-log/proxy-access.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
       }
     },
     {
       type: 'logLevelFilter',
-      level: 'ERROR',
+      level: process.env.node_env === 'test' ? 'OFF' : 'ERROR',
       category: 'proxy',
       appender: {
-        type: 'DateFile',
-        filename: BASE_DIR + '/test-log/proxy-error.log',
+        type: 'console',
+        filename: BASE_DIR + 'test-log/proxy-error.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
       }
     },
     {
       type: 'logLevelFilter',
-      level: 'FATAL',
+      level: process.env.node_env === 'test' ? 'OFF' : 'FATAL',
       category: 'proxy',
       appender: {
-        type: 'DateFile',
-        filename: BASE_DIR + '/test-log/proxy-fatal.log',
+        type: 'console',
+        filename: BASE_DIR + 'test-log/proxy-fatal.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
       }

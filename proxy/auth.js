@@ -73,7 +73,7 @@ const auth = (username, password) => {
     .then(processRes)
     .then((res) => ({ token: res.Token, expired: res.DeadLine }))
     .catch((e) => {
-      logger.error('[auth]' + e)
+      logger.debug('[auth]' + e)
       return Promise.reject(e)
     })
 }

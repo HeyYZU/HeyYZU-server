@@ -7,7 +7,7 @@ const response = (options) => {
   return request(options).then((res) => {
     return res.body
   }).catch((e) => {
-    logger.error('[course]' + e)
+    logger.debug('[course]' + e)
     return Promise.reject(e)
   })
 }

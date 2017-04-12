@@ -7,7 +7,7 @@ const response = (options) => {
     return res.body
   }).catch((e) => {
     if (e.error !== 'Invalid token') {
-      logger.error('[user]' + e)
+      logger.debug('[user]' + e)
     }
     return Promise.reject(e)
   })

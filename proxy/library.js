@@ -7,7 +7,7 @@ const response = (options) => {
   return request(options).then((res) => {
     return res.body
   }).catch((e) => {
-    logger.error('[library]' + e)
+    logger.debug('[library]' + e)
     return Promise.reject(e)
   })
 }
@@ -35,7 +35,7 @@ const bookStatus = (id) => {
         res[0] === undefined ? Promise.reject(new Error('response is empty.')) : ({key: key, res})
       )
       .catch((err) => {
-        logger.info('[bookStatus]Retry - ' + requestOptions.uri)
+        logger.debug('[bookStatus]Retry - ' + requestOptions.uri)
         return createPromise(key, requestOptions)
       })
   }
