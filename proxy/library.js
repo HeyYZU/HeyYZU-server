@@ -60,10 +60,30 @@ const bookStatus = (id) => {
   })
 }
 
+const bookInfo = (id) => {
+  return response({
+    uri: 'https://unipop.yzu.edu.tw/OpenAPI/api/lib/keyword/sys=' + id,
+    resolveWithFullResponse: true,
+    json: true
+  })
+}
+
+const bookCollections = (id) => {
+  return response({
+    uri: 'https://unipop.yzu.edu.tw/OpenAPI/api/lib/Holding/' + id,
+    resolveWithFullResponse: true,
+    json: true
+  })
+}
+
 module.exports = {
   search: {
     title: searchByTitle,
     ISBN: searchByISBN
   },
-  status: bookStatus
+  book: {
+    status: bookStatus,
+    info: bookInfo,
+    collections: bookCollections
+  }
 }
