@@ -1,8 +1,34 @@
 'use strict'
 
-const mock = require('./mock.json').course
+const userProxy = require(path.join(BASE_DIR + '/proxy/user'))
+const courseProxy = require(path.join(BASE_DIR + '/proxy/course'))
 const announcement = (req, res, next) => {
-  res.status(200).json(mock.announcement)
+  let params = req.params.id.match(/(\d{3})(\d{1})_([\w\d]+)_([\w\d]+)/)
+  courseProxy.announcements(req.query.access_token, params[1], params[2], params[3], params[4])
+    .then((res) => {
+      // Following key name of el is from yzu api response\
+      // In order to offset time zone to UTC, - 28800 for parse result of time
+      return res.map((el) => omitEmpty({
+        subject: el.subject,
+        content: el.body.replace(/\r\n/ig, '\n'),
+        datetime: Math.round(Date.parse(el.insert_date) / 1000) - 28800,
+        author: el.users,
+        attach: el.file_id > 0 ? {
+          id: el.file_id,
+          filename: el.file_name
+        } : null
+      }))
+    })
+    .then((content) => {
+      res.status(200).json(content)
+    })
+    .catch((e) => {
+      if (e.message === 'token, year, semester, courseId, courseClass must be given.') {
+        res.status(400).json({message: 'Course id must be given.'})
+      } else {
+        res.status(502).json({message: 'Bad Gateway'})
+      }
+    })
 }
 
 announcement.attach = (req, res, next) => {
@@ -10,7 +36,32 @@ announcement.attach = (req, res, next) => {
 }
 
 const material = (req, res, next) => {
-  res.status(200).json(mock.material)
+  let params = req.params.id.match(/(\d{3})(\d{1})_([\w\d]+)_([\w\d]+)/)
+  courseProxy.materials(req.query.access_token, params[1], params[2], params[3], params[4])
+    .then((res) => {
+      // Following key name of el is from yzu api response
+      // In order to offset time zone to UTC, - 28800 for parse result of time
+      return res.map((el) => omitEmpty({
+        subject: el.description,
+        datetime: Math.round(Date.parse(el.Upload_Time) / 1000) - 28800,
+        attach: el.file_id > 0 ? {
+          id: el.file_id,
+          filename: el.file_name
+        } : null,
+        website: el.wurl,
+        video: el.murl
+      }))
+    })
+    .then((content) => {
+      res.status(200).json(content)
+    })
+    .catch((e) => {
+      if (e.message === 'token, year, semester, courseId, courseClass must be given.') {
+        res.status(400).json({message: 'Course id must be given.'})
+      } else {
+        res.status(502).json({message: 'Bad Gateway'})
+      }
+    })
 }
 
 material.attach = (req, res, next) => {
@@ -18,7 +69,41 @@ material.attach = (req, res, next) => {
 }
 
 const homework = (req, res, next) => {
-  res.status(200).json(mock.homework)
+  let params = req.params.id.match(/(\d{3})(\d{1})_([\w\d]+)_([\w\d]+)/)
+  userProxy.course.homeworks(req.query.access_token, params[1], params[2])
+    .then((res) => {
+      // Following key name of el is from yzu api response
+      // In order to offset time zone to UTC, - 28800 for parse result of time
+      return res.filter(el => el.cos_id.includes(params[3]))
+        .map((el) => omitEmpty({
+          subject: el.subject,
+          content: el.content,
+          datetime: Math.round(Date.parse(el.Insert_time.replace(/下午|上午/, '')) / 1000) - 28800,
+          deadline: Math.round(Date.parse(el.Dead_line.replace(/下午|上午/, '')) / 1000) - 28800,
+          group: !el.ISGroup.includes('S'),
+          optional: el.ck_free !== '0',
+          attach: el.Q_fileid > 0 ? {
+            id: parseInt(el.Q_fileid, 10),
+            filename: el.Q_filename
+          } : null,
+          archive: el.SubRecord.map(el => omitEmpty({
+            id: parseInt(el.A_fileid, 10) || null,
+            filename: el.A_filename || null,
+            datetime: Math.round(Date.parse(el.Update_time.replace(/下午|上午/, '')) / 1000) - 28800 || null,
+            valid: el.abandon === '0' ? true : el.abandon === '1' ? false : null
+          }))
+        }))
+    })
+    .then((content) => {
+      res.status(200).json(content)
+    })
+    .catch((e) => {
+      if (e.message === 'token, year, semester, courseId, courseClass must be given.') {
+        res.status(400).json({message: 'Course id must be given.'})
+      } else {
+        res.status(502).json({message: 'Bad Gateway'})
+      }
+    })
 }
 
 homework.archive = (req, res, next) => {
