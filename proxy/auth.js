@@ -3,6 +3,7 @@
 const request = require('request-promise')
 const ursa = require('ursa')
 const config = CONFIG.YZU_API
+const logger = log4js.getLogger('proxy')
 
 const getRSAKey = () => {
   let options = {
@@ -71,6 +72,10 @@ const auth = (username, password) => {
     .then(prepareReq)
     .then(processRes)
     .then((res) => ({ token: res.Token, expired: res.DeadLine }))
+    .catch((e) => {
+      logger.error('[auth]' + e)
+      return Promise.reject(e)
+    })
 }
 
 module.exports = auth

@@ -1,16 +1,13 @@
 'use strict'
 
 const request = require('request-promise')
-
+const logger = log4js.getLogger('proxy')
 const response = (options) => {
   return request(options).then((res) => {
-    if (res.statusCode !== 200) {
-      return Promise.reject(new Error({
-        body: res.body,
-        status: res.statusCode
-      }))
-    }
     return res.body
+  }).catch((e) => {
+    logger.error('[user]' + e)
+    return Promise.reject(e)
   })
 }
 

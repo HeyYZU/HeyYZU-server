@@ -1,16 +1,14 @@
 'use strict'
 
 const request = require('request-promise')
+const logger = log4js.getLogger('proxy')
 
 const response = (options) => {
   return request(options).then((res) => {
-    if (res.statusCode !== 200) {
-      throw new Error({
-        body: res.body,
-        status: res.statusCode
-      })
-    }
     return res.body
+  }).catch((e) => {
+    logger.error('[course]' + e)
+    return Promise.reject(e)
   })
 }
 
@@ -35,8 +33,8 @@ const materials = (token, year, semester, courseId, courseClass) => {
 }
 
 const announcements = (token, year, semester, courseId, courseClass) => {
-  if (!token || !year || !semester) {
-    throw new Error('token, year and semester must be given.')
+  if (!token || !year || !semester || !courseId || !courseClass) {
+    throw new Error('token, year, semester, courseId, courseClass must be given.')
   }
 
   return response({
