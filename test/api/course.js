@@ -64,7 +64,7 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get announcement attachment', () => {
+    describe.skip('Get announcement attachment', () => {
       describe('with valid token', () => {
         it('valid attachment id', (done) => {
           sendRequest({
@@ -156,7 +156,7 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get material attachment', () => {
+    describe.skip('Get material attachment', () => {
       describe('with valid token', () => {
         it('valid attachment id', (done) => {
           sendRequest({
@@ -253,7 +253,7 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get homework archive', () => {
+    describe.skip('Get homework archive', () => {
       describe('with valid token', () => {
         it('valid archive id', (done) => {
           sendRequest({
@@ -307,7 +307,7 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get homework attachment', () => {
+    describe.skip('Get homework attachment', () => {
       describe('with valid token', () => {
         it('valid attachment id', (done) => {
           sendRequest({
@@ -361,7 +361,7 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get absent information', () => {
+    describe.skip('Get absent information', () => {
       it('with valid token', (done) => {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/absent/' + '1042_CS382_A',
