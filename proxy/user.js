@@ -6,7 +6,9 @@ const response = (options) => {
   return request(options).then((res) => {
     return res.body
   }).catch((e) => {
-    logger.error('[user]' + e)
+    if (e.error !== 'Invalid token') {
+      logger.error('[user]' + e)
+    }
     return Promise.reject(e)
   })
 }
