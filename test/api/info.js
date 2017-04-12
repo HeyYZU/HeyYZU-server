@@ -13,7 +13,7 @@ const sendRequest = (options) => {
 }
 
 module.exports = () => {
-  describe('Info', () => {
+  describe.skip('Info', () => {
     it('System information', (done) => {
       sendRequest({
         uri: 'http://0.0.0.0:8080/info/sysInfo/'

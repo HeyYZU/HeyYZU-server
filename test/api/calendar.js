@@ -13,7 +13,7 @@ const sendRequest = (options) => {
 }
 
 module.exports = (auth) => {
-  describe('Calendar', function() {
+  describe.skip('Calendar', function() {
     // get testing token
     let token = ''
     beforeEach(function(done) {

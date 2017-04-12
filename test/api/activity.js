@@ -13,7 +13,7 @@ const sendRequest = (options) => {
 }
 
 module.exports = (auth) => {
-  describe('Activity', function() {
+  describe.skip('Activity', function() {
     // get testing token
     let token = ''
     before(function(done) {
