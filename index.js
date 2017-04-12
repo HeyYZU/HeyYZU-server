@@ -2,6 +2,7 @@ global.BASE_DIR = __dirname
 global.CONFIG = require('./config.json')
 global.log4js = require('log4js')
 global.path = require('path')
+global.omitEmpty = require('omit-empty')
 
 const http = require('http')
 const app = require('./app')

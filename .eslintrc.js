@@ -28,6 +28,7 @@ module.exports = {
     "CONFIG": true,
     "BASE_DIR": true,
     "log4js": true,
-    "path": true
+    "path": true,
+    "omitEmpty": true
   }
 }
