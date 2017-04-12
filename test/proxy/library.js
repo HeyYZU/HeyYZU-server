@@ -49,8 +49,11 @@ module.exports = (keyword) => {
           })
           done()
         }, (err) => {
-          console.log('fail: ' + err)
-          done(err)
+          if (err.statusCode === 404) {
+            done()
+          } else {
+            done(err)
+          }
         })
         .catch(done)
     })
