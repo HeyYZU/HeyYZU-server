@@ -112,6 +112,7 @@ const bookInfo = (req, res, next) => {
   libraryProxy.book.status(bookId)
       // Following key name of el is from yzu api response
     .then((res) => omitEmpty({
+      id: bookId,
       title: res.info.bktitle,
       author: res.info.author,
       index: res.info.callno || '採購或編目中',
