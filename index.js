@@ -15,6 +15,13 @@ try {
         password: process.env.YZU_API_secret_password
       }
     },
+    mongoDB: {
+      host: process.env.database_host,
+      username: process.env.database_username,
+      password: process.env.database_password,
+      database: process.env.database_database,
+      port: process.env.database_port
+    },
     testing: [{
       username: process.env.testing_username,
       password: process.env.testing_password,
