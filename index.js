@@ -51,7 +51,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'INFO',
       category: ['api', 'httpService'],
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/access.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -62,7 +62,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'ERROR',
       category: ['api', 'httpService'],
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/error.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -73,7 +73,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'FATAL',
       category: ['api', 'httpService'],
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/fatal.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -84,7 +84,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'INFO',
       category: 'proxy',
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/proxy-access.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -95,7 +95,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'ERROR',
       category: 'proxy',
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/proxy-error.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -106,7 +106,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'FATAL',
       category: 'proxy',
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/proxy-fatal.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
