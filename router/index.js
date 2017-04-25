@@ -6,6 +6,7 @@ const course = require('./course')
 const info = require('./info')
 const library = require('./library')
 const user = require('./user')
+const auth = require('./auth')
 
 var router = require('express').Router()
 const middleware = require(path.join(BASE_DIR, 'middleware'))
@@ -16,5 +17,6 @@ router.use('/course', middleware.authority, course)
 router.use('/info', info)
 router.use('/library', middleware.authority, library)
 router.use('/user', middleware.authority, user)
+router.use('/auth', auth)
 
 module.exports = router
