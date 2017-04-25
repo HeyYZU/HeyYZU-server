@@ -26,6 +26,7 @@ var uri = util.format('mongodb://%s:%s@%s:%s/%s',
 )
 
 mongoose.connect(uri)
+mongoose.Promise = Promise
 
 mongoose.connection.on('error', (err) => {
   console.log(err)
