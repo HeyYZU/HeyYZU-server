@@ -19,6 +19,7 @@ const announcement = (req, res, next) => {
           filename: el.file_name
         } : null
       }))
+      .sort((a, b) => b.datetime - a.datetime)
     })
     .then((content) => {
       res.status(200).json(content)
@@ -51,6 +52,7 @@ const material = (req, res, next) => {
         website: el.wurl,
         video: el.murl
       }))
+      .sort((a, b) => b.datetime - a.datetime)
     })
     .then((content) => {
       res.status(200).json(content)
@@ -92,6 +94,7 @@ const homework = (req, res, next) => {
             valid: el.abandon === '0' ? true : el.abandon === '1' ? false : null
           }))
         }))
+        .sort((a, b) => b.datetime - a.datetime)
     })
     .then((content) => {
       res.status(200).json(content)
