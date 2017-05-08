@@ -117,7 +117,7 @@ const bookInfo = (req, res, next) => {
       author: res.info.author,
       index: res.info.callno || '採購或編目中',
       publisher: res.info.Publisher,
-      year: res.info.publish_YY,
+      year: parseInt(res.info.publish_YY, 10) || 0,
       isbn: parseInt(res.info.ISBN.replace(/[^0-9]/ig, ''), 10) || null,
       cover: res.info.Cover,
       media: res.info.material_type === '視聽多媒體' || null,
