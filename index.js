@@ -16,11 +16,11 @@ try {
       }
     },
     mongoDB: {
-      host: process.env.database_host,
+      host: process.env.database_host || 'localhost',
       username: process.env.database_username,
       password: process.env.database_password,
-      database: process.env.database_database,
-      port: process.env.database_port
+      database: process.env.database_database || 'testing',
+      port: process.env.database_port || 27017
     },
     testing: [{
       username: process.env.testing_username,
