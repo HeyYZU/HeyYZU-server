@@ -19,6 +19,10 @@ var UserSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
     }
+  },
+  library: {
+    read: [Number],
+    favorite: [Number]
   }
 })
 

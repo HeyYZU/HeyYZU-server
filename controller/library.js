@@ -2,6 +2,7 @@
 
 const libraryProxy = require(path.join(BASE_DIR, '/proxy/library'))
 const userProxy = require(path.join(BASE_DIR, '/proxy/user'))
+const mock = require('./mock.json')
 const readingList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.reading(token)
@@ -104,7 +105,7 @@ const delFavorite = (req, res, next) => {
 }
 
 const dashboard = (req, res, next) => {
-  res.status(200).json(mock.dashboard)
+  res.status(200).json(mock.library.dashboard)
 }
 
 const bookInfo = (req, res, next) => {
