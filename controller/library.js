@@ -2,6 +2,7 @@
 
 const libraryProxy = require(path.join(BASE_DIR, '/proxy/library'))
 const userProxy = require(path.join(BASE_DIR, '/proxy/user'))
+const mock = require('./mock.json')
 const readingList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.reading(token)
@@ -16,7 +17,7 @@ const readingList = (req, res, next) => {
           dueDate: Math.round(Date.parse(el.ReadDueDate) / 1000) - 28800,
           fine: el.Fine > 0 ? el.Fine : null,
           renewable: el.MaxRenewTimes > 0,
-          reserved: Math.round(Date.parse(el.RecallDate) / 1000) - 2880 <= 0
+          reserved: Math.round(Date.parse(el.RecallDate) / 1000) - 28800 <= 0
         }
       }))
     })
@@ -33,7 +34,6 @@ const readList = (req, res, next) => {
   userProxy.library.read(token)
     .then((res) => {
       // Following key name of el is from yzu api response
-      // In order to offset time zone to UTC, - 28800 for parse result of time
       return res.map((el) => ({
         id: parseInt(el.Bibliosno, 10),
         title: el.bktitle,
@@ -79,7 +79,7 @@ const reservingList = (req, res, next) => {
         author: el.author,
         attr: {
           order: el.OrderSNo,
-          reservedBefore: el.OrderSNo === 1 ? Math.round(Date.parse(el.HoldDeadLine) / 1000) - 2880 : null
+          reservedBefore: Date.parse(el.HoldDeadLine) > 0 ? Math.round(Date.parse(el.HoldDeadLine) / 1000) - 28800 : null
         }
       }))
     })
@@ -104,13 +104,14 @@ const delFavorite = (req, res, next) => {
 }
 
 const dashboard = (req, res, next) => {
-  res.status(200).json(mock.dashboard)
+  res.status(200).json(mock.library.dashboard)
 }
 
 const bookInfo = (req, res, next) => {
   let bookId = req.params.id
   libraryProxy.book.status(bookId)
       // Following key name of el is from yzu api response
+      // In order to offset time zone to UTC, - 28800 for parse result of time
     .then((res) => omitEmpty({
       id: bookId,
       title: res.info.bktitle,
@@ -126,7 +127,7 @@ const bookInfo = (req, res, next) => {
         branch: el.SublibraryC || null,
         collection: el.CollectionC || null,
         reservingCount: el.RequestCount || null,
-        return: Math.round(Date.parse(el.RealDueDate) / 1000) - 2880 || null,
+        return: Math.round(Date.parse(el.RealDueDate) / 1000) - 28800 || null,
         attr: {
           type: el.MaterialType || null
         }
