@@ -12,12 +12,17 @@ module.exports = (req, res, next) => {
       return Promise.resolve()
     })
   })
+  .catch((e) => {
+    res.status(400).json({
+      message: 'Token invalid'
+    })
+  })
   .then(() => {
     next()
   })
   .catch((e) => {
-    res.status(400).json({
-      message: 'Token invalid'
+    res.status(500).json({
+      message: 'Internal error.'
     })
   })
 }
