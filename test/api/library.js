@@ -67,8 +67,8 @@ module.exports = (auth) => {
               expect(favoriteBook.attr).to.include.keys('dueDate')
               expect(favoriteBook.attr).to.include.keys('renewable')
               expect(favoriteBook.attr).to.include.keys('reserved')
-              done()
             }
+            done()
           })
           .catch(done)
       })

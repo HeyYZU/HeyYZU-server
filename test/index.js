@@ -1,5 +1,6 @@
 global.log4js = require('log4js')
 global.path = require('path')
+global.omitEmpty = require('omit-empty')
 global.BASE_DIR = path.join(__dirname, '../')
 try {
   global.CONFIG = require('../config.json')
@@ -63,7 +64,7 @@ log4js.configure({
   ]
 })
 
-const TEST_DATA = CONFIG.testing
+const TEST_DATA = CONFIG.testingUser
 
 const proxyTesting = require('./proxy')
 const apiTesting = require('./api')
