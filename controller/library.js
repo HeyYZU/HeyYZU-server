@@ -68,7 +68,46 @@ const delFavorite = (req, res, next) => {
 }
 
 const dashboard = (req, res, next) => {
-  res.status(200).json(mock.library.dashboard)
+  let token = req.query.access_token
+  const readingBook = userProxy.library.reading(token)
+    .then((content) => {
+      return {
+        key: 'reading',
+        package: content
+      }
+    })
+
+  const reservingBook = userProxy.library.reserving(token).then((content) => {
+    return {
+      key: 'reserving',
+      package: content
+    }
+  })
+
+  Promise.all([readingBook, reservingBook])
+  .then((r) => {
+    const readingBook = r.filter((r) => r.key === 'reading')[0].package
+    const reservingBook = r.filter((r) => r.key === 'reserving')[0].package
+
+    res.status(200).json({
+      reading: {
+        count: readingBook.length,
+        leastFive: readingBook.slice(0, 5)
+      },
+      reserving: {
+        count: reservingBook.length,
+        leastFive: reservingBook.slice(0, 5)
+      },
+      favorite: {
+        count: 0,
+        leastFive: []
+      }
+    })
+  })
+  .catch((e) => {
+    console.log(e)
+    res.status(500).json({message: 'Internal Error.'})
+  })
 }
 
 const bookInfo = (req, res, next) => {
