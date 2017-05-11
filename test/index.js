@@ -13,7 +13,7 @@ try {
         password: process.env.YZU_API_secret_password
       }
     },
-    testing: [{
+    testingUser: [{
       username: process.env.testing_username,
       password: process.env.testing_password,
       year: process.env.testing_year,
