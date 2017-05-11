@@ -13,8 +13,8 @@ const sendRequest = (options) => {
 }
 
 module.exports = (auth) => {
-  describe('User', () => {
-    describe('Get curriculum list', () => {
+  describe('User', function() {
+    describe('Get curriculum list', function() {
        // get testing token
       let token = ''
       before(function(done) {
@@ -23,7 +23,8 @@ module.exports = (auth) => {
           done()
         })
       })
-      it('with valid token', (done) => {
+      this.timeout(20 * 1000)
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/user/curriculum/',
           qs: {
@@ -51,7 +52,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/user/curriculum/',
           qs: {

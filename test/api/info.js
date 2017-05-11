@@ -12,9 +12,9 @@ const sendRequest = (options) => {
   return request(options)
 }
 
-module.exports = () => {
-  describe.skip('Info', () => {
-    it('System information', (done) => {
+module.exports = function() {
+  describe.skip('Info', function() {
+    it('System information', function(done) {
       sendRequest({
         uri: 'http://0.0.0.0:8080/info/sysInfo/'
       })
@@ -27,7 +27,7 @@ module.exports = () => {
         .catch(done)
     })
 
-    it('Android APP Client information', (done) => {
+    it('Android APP Client information', function(done) {
       sendRequest({
         uri: 'http://0.0.0.0:8080/info/app/android/'
       })
@@ -40,7 +40,7 @@ module.exports = () => {
         .catch(done)
     })
 
-    it('iOS APP Client information', (done) => {
+    it('iOS APP Client information', function(done) {
       sendRequest({
         uri: 'http://0.0.0.0:8080/info/app/ios/'
       })

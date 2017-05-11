@@ -15,11 +15,11 @@ module.exports = (username, password, year, semester) => {
       testToken = r.token
     })
 
-  expect(getToken).to.eventually.be.fulfilled.then(() => {
+  expect(getToken).to.eventually.be.fulfilled.then(function() {
     describe('User Proxy Test', function() {
       this.timeout(10 * 1000)
       describe('curriculum', function() {
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.course.curriculum(testToken, year, semester)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -29,7 +29,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.course.curriculum('invalid')
             .then((r) => {
               done(new Error('No throw error when token is valid.'))
@@ -43,7 +43,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get homeworks', function() {
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.course.homeworks(testToken, year, semester)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -53,7 +53,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.course.homeworks('invalid', year, semester)
             .then((result) => {
               done(new Error('No throw error when token is invalid.'))
@@ -66,7 +66,7 @@ module.exports = (username, password, year, semester) => {
         })
 
         describe('archive', function() {
-          it('throw error when token or id is invalid', (done) => {
+          it('throw error when token or id is invalid', function(done) {
             user.course.homeworks.archive('invalid', 0)
               .then((result) => {
                 done(new Error('No throw error when token or id is invalid.'))
@@ -80,7 +80,7 @@ module.exports = (username, password, year, semester) => {
         })
 
         describe('attachment', function() {
-          it('throw error when token or id is invalid', (done) => {
+          it('throw error when token or id is invalid', function(done) {
             user.course.homeworks.attachment('invalid', 0)
               .then((result) => {
                 done(new Error('No throw error when token or id is invalid.'))
@@ -95,7 +95,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get materials', function() {
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.course.materials(testToken, year, semester)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -105,7 +105,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.course.materials('invalid', year, semester)
             .then((result) => {
               done(new Error('No throw error when token is invalid.'))
@@ -119,7 +119,7 @@ module.exports = (username, password, year, semester) => {
       })
 
       describe('get announcements', function() {
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.course.announcements(testToken, year, semester)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -129,7 +129,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.course.announcements('12558', year, semester)
             .then((result) => {
               done(new Error('No throw error when token is invalid.'))
@@ -144,7 +144,7 @@ module.exports = (username, password, year, semester) => {
 
       describe('get library reading list', function() {
         this.timeout(10 * 1000)
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.library.reading(testToken)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -154,7 +154,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.library.reading('sdfasdf')
             .then((result) => {
               done(new Error('No throw error when token is invalid.'))
@@ -169,7 +169,7 @@ module.exports = (username, password, year, semester) => {
 
       describe('get library read list', function() {
         this.timeout(10 * 1000)
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.library.read(testToken)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -179,7 +179,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.library.read('sdfasdf')
             .then((result) => {
               done(new Error('No throw error when token is invalid.'))
@@ -194,7 +194,7 @@ module.exports = (username, password, year, semester) => {
 
       describe('get library reserving list', function() {
         this.timeout(10 * 1000)
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           user.library.reserving(testToken)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -204,7 +204,7 @@ module.exports = (username, password, year, semester) => {
             })
         })
 
-        it('throw error when token is invalid', (done) => {
+        it('throw error when token is invalid', function(done) {
           user.library.reserving('sdfasdf')
             .then((result) => {
               done(new Error('No throw error when token is invalid.'))
