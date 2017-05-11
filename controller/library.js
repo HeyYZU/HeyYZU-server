@@ -6,21 +6,6 @@ const mock = require('./mock.json')
 const readingList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.reading(token)
-    .then((res) => {
-      // Following key name of el is from yzu api response
-      // In order to offset time zone to UTC, - 28800 for parse result of time
-      return res.map((el) => omitEmpty({
-        id: parseInt(el.Bibliosno, 10),
-        title: el.bktitle,
-        author: el.author,
-        attr: {
-          dueDate: Math.round(Date.parse(el.ReadDueDate) / 1000) - 28800,
-          fine: el.Fine > 0 ? el.Fine : null,
-          renewable: el.MaxRenewTimes > 0,
-          reserved: Math.round(Date.parse(el.RecallDate) / 1000) - 28800 <= 0
-        }
-      }))
-    })
     .then((content) => {
       res.status(200).json(content)
     })
@@ -32,14 +17,6 @@ const readingList = (req, res, next) => {
 const readList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.read(token)
-    .then((res) => {
-      // Following key name of el is from yzu api response
-      return res.map((el) => ({
-        id: parseInt(el.Bibliosno, 10),
-        title: el.bktitle,
-        author: el.author
-      }))
-    })
     .then((content) => {
       return Promise.all(
           content.map(el => libraryProxy.book.status(el.id))
@@ -70,19 +47,6 @@ const readList = (req, res, next) => {
 const reservingList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.reserving(token)
-    .then((res) => {
-      // Following key name of el is from yzu api response
-      // In order to offset time zone to UTC, - 28800 for parse result of time
-      return res.map((el) => omitEmpty({
-        id: el.bibliosno,
-        title: el.bktitle,
-        author: el.author,
-        attr: {
-          order: el.OrderSNo,
-          reservedBefore: Date.parse(el.HoldDeadLine) > 0 ? Math.round(Date.parse(el.HoldDeadLine) / 1000) - 28800 : null
-        }
-      }))
-    })
     .then((content) => {
       res.status(200).json(content)
     })
