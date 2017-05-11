@@ -12,13 +12,12 @@ module.exports = (req, res, next) => {
       return Promise.resolve()
     })
   })
-  .catch((e) => {
+  .then(() => {
+    next()
+  }, (e) => {
     res.status(400).json({
       message: 'Token invalid'
     })
-  })
-  .then(() => {
-    next()
   })
   .catch((e) => {
     res.status(500).json({
