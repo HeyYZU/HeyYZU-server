@@ -23,7 +23,7 @@ module.exports = (auth) => {
       })
     })
     describe('get list', function() {
-      it('with valid token', (done) => {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/calendar/list',
           qs: {
@@ -38,7 +38,7 @@ module.exports = (auth) => {
           })
           .catch(done)
       })
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/calendar/list',
           qs: {
@@ -62,7 +62,7 @@ module.exports = (auth) => {
 
     describe('put event', function() {
       describe('with valid token', function() {
-        it('all column are filled', (done) => {
+        it('all column are filled', function(done) {
           sendRequest({
             method: 'put',
             uri: 'http://0.0.0.0:8080/calendar/event',
@@ -88,7 +88,7 @@ module.exports = (auth) => {
             .catch(done)
         })
 
-        it('only required column', (done) => {
+        it('only required column', function(done) {
           sendRequest({
             method: 'put',
             uri: 'http://0.0.0.0:8080/calendar/event',
@@ -111,7 +111,7 @@ module.exports = (auth) => {
             .catch(done)
         })
 
-        it('some column are missing', (done) => {
+        it('some column are missing', function(done) {
           sendRequest({
             method: 'put',
             uri: 'http://0.0.0.0:8080/calendar/event',
@@ -136,7 +136,7 @@ module.exports = (auth) => {
         })
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           method: 'put',
           uri: 'http://0.0.0.0:8080/calendar/event',
@@ -157,8 +157,8 @@ module.exports = (auth) => {
       })
     })
 
-    describe('get event', () => {
-      it('with valid token', (done) => {
+    describe('get event', function() {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/calendar/event/' + eventId,
           qs: {
@@ -174,7 +174,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/calendar/event/' + eventId,
           qs: {
@@ -194,9 +194,9 @@ module.exports = (auth) => {
       })
     })
 
-    describe('delete event', () => {
-      describe('with valid token', () => {
-        it('valid event id', (done) => {
+    describe('delete event', function() {
+      describe('with valid token', function() {
+        it('valid event id', function(done) {
           sendRequest({
             method: 'delete',
             uri: 'http://0.0.0.0:8080/calendar/event/' + eventId,
@@ -213,7 +213,7 @@ module.exports = (auth) => {
             .catch(done)
         })
 
-        it('invalid event id', (done) => {
+        it('invalid event id', function(done) {
           sendRequest({
             method: 'delete',
             uri: 'http://0.0.0.0:8080/calendar/event/' + 'invalid_id',
@@ -234,8 +234,8 @@ module.exports = (auth) => {
         })
       })
 
-      describe('with invalid token', () => {
-        it('fail whatever event id', (done) => {
+      describe('with invalid token', function() {
+        it('fail whatever event id', function(done) {
           sendRequest({
             method: 'delete',
             uri: 'http://0.0.0.0:8080/calendar/event/' + eventId,

@@ -14,11 +14,11 @@ module.exports = (username, password, year, semester, courseId, courseClass) => 
       .then((r) => {
         testToken = r.token
       })
-  expect(getToken).to.eventually.be.fulfilled.then(() => {
+  expect(getToken).to.eventually.be.fulfilled.then(function() {
     describe('Course Proxy Test', function() {
       this.timeout(10 * 1000)
       describe('get materials', function() {
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           course.materials(testToken, year, semester, courseId, courseClass)
             .then((result) => {
               expect(result).to.be.an('array')
@@ -30,7 +30,7 @@ module.exports = (username, password, year, semester, courseId, courseClass) => 
       })
 
       describe('get announcements', function() {
-        it('is successful', (done) => {
+        it('is successful', function(done) {
           course.announcements(testToken, year, semester, courseId, courseClass)
             .then((result) => {
               expect(result).to.be.an('array')

@@ -2,24 +2,10 @@
 
 const libraryProxy = require(path.join(BASE_DIR, '/proxy/library'))
 const userProxy = require(path.join(BASE_DIR, '/proxy/user'))
+const mock = require('./mock.json')
 const readingList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.reading(token)
-    .then((res) => {
-      // Following key name of el is from yzu api response
-      // In order to offset time zone to UTC, - 28800 for parse result of time
-      return res.map((el) => omitEmpty({
-        id: parseInt(el.Bibliosno, 10),
-        title: el.bktitle,
-        author: el.author,
-        attr: {
-          dueDate: Math.round(Date.parse(el.ReadDueDate) / 1000) - 28800,
-          fine: el.Fine > 0 ? el.Fine : null,
-          renewable: el.MaxRenewTimes > 0,
-          reserved: Math.round(Date.parse(el.RecallDate) / 1000) - 2880 <= 0
-        }
-      }))
-    })
     .then((content) => {
       res.status(200).json(content)
     })
@@ -31,15 +17,6 @@ const readingList = (req, res, next) => {
 const readList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.read(token)
-    .then((res) => {
-      // Following key name of el is from yzu api response
-      // In order to offset time zone to UTC, - 28800 for parse result of time
-      return res.map((el) => ({
-        id: parseInt(el.Bibliosno, 10),
-        title: el.bktitle,
-        author: el.author
-      }))
-    })
     .then((content) => {
       return Promise.all(
           content.map(el => libraryProxy.book.status(el.id))
@@ -70,19 +47,6 @@ const readList = (req, res, next) => {
 const reservingList = (req, res, next) => {
   let token = req.query.access_token
   userProxy.library.reserving(token)
-    .then((res) => {
-      // Following key name of el is from yzu api response
-      // In order to offset time zone to UTC, - 28800 for parse result of time
-      return res.map((el) => omitEmpty({
-        id: el.bibliosno,
-        title: el.bktitle,
-        author: el.author,
-        attr: {
-          order: el.OrderSNo,
-          reservedBefore: el.OrderSNo === 1 ? Math.round(Date.parse(el.HoldDeadLine) / 1000) - 2880 : null
-        }
-      }))
-    })
     .then((content) => {
       res.status(200).json(content)
     })
@@ -104,19 +68,60 @@ const delFavorite = (req, res, next) => {
 }
 
 const dashboard = (req, res, next) => {
-  res.status(200).json(mock.dashboard)
+  let token = req.query.access_token
+  const readingBook = userProxy.library.reading(token)
+    .then((content) => {
+      return {
+        key: 'reading',
+        package: content
+      }
+    })
+
+  const reservingBook = userProxy.library.reserving(token).then((content) => {
+    return {
+      key: 'reserving',
+      package: content
+    }
+  })
+
+  Promise.all([readingBook, reservingBook])
+  .then((r) => {
+    const readingBook = r.filter((r) => r.key === 'reading')[0].package
+    const reservingBook = r.filter((r) => r.key === 'reserving')[0].package
+
+    res.status(200).json({
+      reading: {
+        count: readingBook.length,
+        leastFive: readingBook.slice(0, 5)
+      },
+      reserving: {
+        count: reservingBook.length,
+        leastFive: reservingBook.slice(0, 5)
+      },
+      favorite: {
+        count: 0,
+        leastFive: []
+      }
+    })
+  })
+  .catch((e) => {
+    console.log(e)
+    res.status(500).json({message: 'Internal Error.'})
+  })
 }
 
 const bookInfo = (req, res, next) => {
   let bookId = req.params.id
   libraryProxy.book.status(bookId)
       // Following key name of el is from yzu api response
+      // In order to offset time zone to UTC, - 28800 for parse result of time
     .then((res) => omitEmpty({
+      id: bookId,
       title: res.info.bktitle,
       author: res.info.author,
       index: res.info.callno || '採購或編目中',
       publisher: res.info.Publisher,
-      year: res.info.publish_YY,
+      year: parseInt(res.info.publish_YY, 10) || 0,
       isbn: parseInt(res.info.ISBN.replace(/[^0-9]/ig, ''), 10) || null,
       cover: res.info.Cover,
       media: res.info.material_type === '視聽多媒體' || null,
@@ -125,7 +130,7 @@ const bookInfo = (req, res, next) => {
         branch: el.SublibraryC || null,
         collection: el.CollectionC || null,
         reservingCount: el.RequestCount || null,
-        return: Math.round(Date.parse(el.RealDueDate) / 1000) - 2880 || null,
+        return: Math.round(Date.parse(el.RealDueDate) / 1000) - 28800 || null,
         attr: {
           type: el.MaterialType || null
         }

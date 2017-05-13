@@ -22,7 +22,7 @@ module.exports = (auth) => {
         done()
       })
     })
-    it('get list with valid token', (done) => {
+    it('get list with valid token', function(done) {
       sendRequest({
         uri: 'http://0.0.0.0:8080/activity/list',
         qs: {
@@ -37,7 +37,7 @@ module.exports = (auth) => {
         })
         .catch(done)
     })
-    it('get list with invalid token', (done) => {
+    it('get list with invalid token', function(done) {
       sendRequest({
         uri: 'http://0.0.0.0:8080/activity/list',
         qs: {

@@ -6,6 +6,13 @@
       "password": ""
     }
   },
+  "mongoDB": {
+    "host": "",
+    "username": "",
+    "password": "",
+    "database": "",
+    "port": ""
+  },
   "testingUser": [
     {
       "username": "",

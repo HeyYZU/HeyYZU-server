@@ -23,7 +23,7 @@ module.exports = (auth) => {
         done()
       })
     })
-    it('Book information', (done) => {
+    it('Book information', function(done) {
       sendRequest({
         uri: 'http://0.0.0.0:8080/library/book/' + 565766,
         qs: {
@@ -48,7 +48,7 @@ module.exports = (auth) => {
 
     describe('Reading list', function() {
       this.timeout(20 * 1000)
-      it('with valid token', (done) => {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/library/reading/',
           qs: {
@@ -67,13 +67,13 @@ module.exports = (auth) => {
               expect(favoriteBook.attr).to.include.keys('dueDate')
               expect(favoriteBook.attr).to.include.keys('renewable')
               expect(favoriteBook.attr).to.include.keys('reserved')
-              done()
             }
+            done()
           })
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/library/reading/',
           qs: {
@@ -94,7 +94,7 @@ module.exports = (auth) => {
 
     describe('Read list', function() {
       this.timeout(50 * 1000)
-      it('with valid token', (done) => {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/library/read/',
           qs: {
@@ -118,7 +118,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/library/read/',
           qs: {
@@ -139,7 +139,7 @@ module.exports = (auth) => {
 
     describe('Reserving list', function() {
       this.timeout(20 * 1000)
-      it('with valid token', (done) => {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/library/reserving/',
           qs: {
@@ -162,7 +162,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/library/reserving/',
           qs: {
@@ -181,9 +181,9 @@ module.exports = (auth) => {
       })
     })
 
-    describe.skip('Favorite', () => {
-      describe('Get favorite list', () => {
-        it('with valid token', (done) => {
+    describe.skip('Favorite', function() {
+      describe('Get favorite list', function() {
+        it('with valid token', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/library/favorite/',
             qs: {
@@ -207,7 +207,7 @@ module.exports = (auth) => {
             })
             .catch(done)
         })
-        it('with invalid token', (done) => {
+        it('with invalid token', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/library/favorite/',
             qs: {
@@ -226,9 +226,9 @@ module.exports = (auth) => {
         })
       })
 
-      describe('Put book into favorite list', () => {
-        describe('with valid token', () => {
-          it('valid book id', (done) => {
+      describe('Put book into favorite list', function() {
+        describe('with valid token', function() {
+          it('valid book id', function(done) {
             sendRequest({
               method: 'put',
               uri: 'http://0.0.0.0:8080/library/favorite/',
@@ -244,7 +244,7 @@ module.exports = (auth) => {
               .catch(done)
           })
 
-          it('invalid book id', (done) => {
+          it('invalid book id', function(done) {
             sendRequest({
               method: 'put',
               uri: 'http://0.0.0.0:8080/library/favorite/',
@@ -263,7 +263,7 @@ module.exports = (auth) => {
           })
         })
 
-        it('with invalid token', (done) => {
+        it('with invalid token', function(done) {
           sendRequest({
             method: 'put',
             uri: 'http://0.0.0.0:8080/library/favorite/',
@@ -283,9 +283,9 @@ module.exports = (auth) => {
         })
       })
 
-      describe('Delete book from favorite list', () => {
-        describe('with valid token', () => {
-          it('valid book id', (done) => {
+      describe('Delete book from favorite list', function() {
+        describe('with valid token', function() {
+          it('valid book id', function(done) {
             sendRequest({
               method: 'delete',
               uri: 'http://0.0.0.0:8080/library/favorite/',
@@ -301,7 +301,7 @@ module.exports = (auth) => {
               .catch(done)
           })
 
-          it('invalid book id', (done) => {
+          it('invalid book id', function(done) {
             sendRequest({
               method: 'delete',
               uri: 'http://0.0.0.0:8080/library/favorite/',
@@ -320,7 +320,7 @@ module.exports = (auth) => {
           })
         })
 
-        it('with invalid token', (done) => {
+        it('with invalid token', function(done) {
           sendRequest({
             method: 'delete',
             uri: 'http://0.0.0.0:8080/library/favorite/',

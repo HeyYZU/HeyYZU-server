@@ -15,6 +15,13 @@ try {
         password: process.env.YZU_API_secret_password
       }
     },
+    mongoDB: {
+      host: process.env.database_host || 'localhost',
+      username: process.env.database_username,
+      password: process.env.database_password,
+      database: process.env.database_database || 'testing',
+      port: process.env.database_port || 27017
+    },
     testing: [{
       username: process.env.testing_username,
       password: process.env.testing_password,
@@ -44,7 +51,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'INFO',
       category: ['api', 'httpService'],
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/access.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -55,7 +62,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'ERROR',
       category: ['api', 'httpService'],
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/error.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -66,7 +73,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'FATAL',
       category: ['api', 'httpService'],
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/fatal.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -77,7 +84,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'INFO',
       category: 'proxy',
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/proxy-access.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -88,7 +95,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'ERROR',
       category: 'proxy',
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/proxy-error.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true
@@ -99,7 +106,7 @@ log4js.configure({
       level: process.env.node_env === 'test' ? 'OFF' : 'FATAL',
       category: 'proxy',
       appender: {
-        type: process.env.node_env === 'test' ? 'console' : 'DateFile',
+        type: process.env.node_env === 'test' ? 'console' : 'dateFile',
         filename: BASE_DIR + '/log/proxy-fatal.log',
         pattern: '-yyyy-MM-dd.log',
         alwaysIncludePattern: true

@@ -14,10 +14,14 @@ module.exports = (req, res, next) => {
   })
   .then(() => {
     next()
-  })
-  .catch((e) => {
+  }, (e) => {
     res.status(400).json({
       message: 'Token invalid'
+    })
+  })
+  .catch((e) => {
+    res.status(500).json({
+      message: 'Internal error.'
     })
   })
 }

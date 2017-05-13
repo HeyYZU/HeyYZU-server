@@ -11,7 +11,16 @@ const semester = (month) => {
   return month > 1 && month < 7 ? 2 : 1
 }
 
+const offsetPM = (rawString, UnixTimeStamp) => {
+  if (rawString.includes('下午')) {
+    return UnixTimeStamp + 60 * 60 * 12
+  }
+
+  return UnixTimeStamp
+}
+
 module.exports = {
   academicYear: academicYear,
-  semester: semester
+  semester: semester,
+  offsetPM: offsetPM
 }

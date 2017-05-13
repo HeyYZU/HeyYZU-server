@@ -9,7 +9,7 @@ chai.should()
 module.exports = (keyword) => {
   describe('Library Proxy Test', function() {
     this.timeout(20 * 1000)
-    it('Search by keyword', (done) => {
+    it('Search by keyword', function(done) {
       library.search.title(keyword)
         .then((res) => {
           expect(res).to.be.an('array')
@@ -18,7 +18,7 @@ module.exports = (keyword) => {
         .catch(done)
     })
 
-    it('Search by ISBN', (done) => {
+    it('Search by ISBN', function(done) {
       library.search.ISBN(9789868968424)
         .then((res) => {
           expect(res).to.be.an('array')
@@ -27,7 +27,7 @@ module.exports = (keyword) => {
         .catch(done)
     })
 
-    it('Book status', (done) => {
+    it('Book status', function(done) {
       library.book.status(565766)
         .then((res) => {
           expect(res).to.include.keys('collections')
@@ -40,7 +40,7 @@ module.exports = (keyword) => {
     this.timeout(100 * 1000)
 
     let multipleNumber = 10 // + Math.round(Math.random() * 100)
-    it('Multiple(' + multipleNumber + ') book status', (done) => {
+    it('Multiple(' + multipleNumber + ') book status', function(done) {
       Promise.all(
         Array(multipleNumber).fill(565766).map((el, i) => library.book.status(el + i)))
         .then((res) => {

@@ -13,7 +13,7 @@ const sendRequest = (options) => {
 }
 
 module.exports = (auth) => {
-  describe('Course', () => {
+  describe('Course', function() {
     // get testing token
     let token = ''
     beforeEach(function(done) {
@@ -22,8 +22,8 @@ module.exports = (auth) => {
         done()
       })
     })
-    describe('Get announcement list', () => {
-      it('with valid token', (done) => {
+    describe('Get announcement list', function() {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/announcement/' + '1042_CS382_A',
           qs: {
@@ -45,7 +45,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/announcement/' + '1042_CS382_A',
           qs: {
@@ -64,9 +64,9 @@ module.exports = (auth) => {
       })
     })
 
-    describe.skip('Get announcement attachment', () => {
-      describe('with valid token', () => {
-        it('valid attachment id', (done) => {
+    describe.skip('Get announcement attachment', function() {
+      describe('with valid token', function() {
+        it('valid attachment id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/announcement/attach/',
             qs: {
@@ -79,7 +79,7 @@ module.exports = (auth) => {
             })
             .catch(done)
         })
-        it('invalid attachment id', (done) => {
+        it('invalid attachment id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/announcement/attach/' + 'invalid_id',
             qs: {
@@ -97,7 +97,7 @@ module.exports = (auth) => {
             .catch(done)
         })
       })
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/announcement/attach/',
           qs: {
@@ -116,8 +116,8 @@ module.exports = (auth) => {
       })
     })
 
-    describe('Get material list', () => {
-      it('with valid token', (done) => {
+    describe('Get material list', function() {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/material/' + '1042_CS382_A',
           qs: {
@@ -137,7 +137,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/material/' + '1042_CS382_A',
           qs: {
@@ -156,9 +156,9 @@ module.exports = (auth) => {
       })
     })
 
-    describe.skip('Get material attachment', () => {
-      describe('with valid token', () => {
-        it('valid attachment id', (done) => {
+    describe.skip('Get material attachment', function() {
+      describe('with valid token', function() {
+        it('valid attachment id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/material/attach/',
             qs: {
@@ -171,7 +171,7 @@ module.exports = (auth) => {
             })
             .catch(done)
         })
-        it('invalid attachment id', (done) => {
+        it('invalid attachment id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/material/attach/' + 'invalid_id',
             qs: {
@@ -189,7 +189,7 @@ module.exports = (auth) => {
             .catch(done)
         })
       })
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/material/attach/',
           qs: {
@@ -210,7 +210,7 @@ module.exports = (auth) => {
 
     describe('Get homework list', function() {
       this.timeout(20 * 1000)
-      it('with valid token', (done) => {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/homework/' + '1042_CS382_A',
           qs: {
@@ -235,7 +235,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/homework/' + '1042_CS382_A',
           qs: {
@@ -254,9 +254,9 @@ module.exports = (auth) => {
       })
     })
 
-    describe.skip('Get homework archive', () => {
-      describe('with valid token', () => {
-        it('valid archive id', (done) => {
+    describe.skip('Get homework archive', function() {
+      describe('with valid token', function() {
+        it('valid archive id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/homework/archive/',
             qs: {
@@ -270,7 +270,7 @@ module.exports = (auth) => {
             .catch(done)
         })
 
-        it('invalid archive id', (done) => {
+        it('invalid archive id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/homework/archive/',
             qs: {
@@ -289,7 +289,7 @@ module.exports = (auth) => {
         })
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/homework/archive/',
           qs: {
@@ -308,9 +308,9 @@ module.exports = (auth) => {
       })
     })
 
-    describe.skip('Get homework attachment', () => {
-      describe('with valid token', () => {
-        it('valid attachment id', (done) => {
+    describe.skip('Get homework attachment', function() {
+      describe('with valid token', function() {
+        it('valid attachment id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/homework/attach/',
             qs: {
@@ -324,7 +324,7 @@ module.exports = (auth) => {
             .catch(done)
         })
 
-        it('invalid attachment id', (done) => {
+        it('invalid attachment id', function(done) {
           sendRequest({
             uri: 'http://0.0.0.0:8080/course/homework/attach/',
             qs: {
@@ -343,7 +343,7 @@ module.exports = (auth) => {
         })
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/homework/attach/',
           qs: {
@@ -362,8 +362,8 @@ module.exports = (auth) => {
       })
     })
 
-    describe.skip('Get absent information', () => {
-      it('with valid token', (done) => {
+    describe.skip('Get absent information', function() {
+      it('with valid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/absent/' + '1042_CS382_A',
           qs: {
@@ -378,7 +378,7 @@ module.exports = (auth) => {
           .catch(done)
       })
 
-      it('with invalid token', (done) => {
+      it('with invalid token', function(done) {
         sendRequest({
           uri: 'http://0.0.0.0:8080/course/absent/' + '1042_CS382_A',
           qs: {
