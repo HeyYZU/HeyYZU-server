@@ -1,6 +1,6 @@
 {
   "name": "HeyYZU-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "HeyYZU app server side",
   "main": "index.js",
   "repository": "git@github.com:HeyYZU/HeyYZU-server.git",
